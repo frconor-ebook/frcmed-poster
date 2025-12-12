@@ -185,10 +185,10 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  frcmed-image --quote "Peace begins with a pause."
-  frcmed-image --quote "..." --transcript https://...
-  frcmed-image --quote "..." --style hopper
-  frcmed-image --quote "..." --llm claude
+  frcmed-image -q "Peace begins with a pause."
+  frcmed-image -q "..." -t https://...
+  frcmed-image -q "..." -s hopper
+  frcmed-image -q "..." -l claude
         """
     )
 
@@ -199,26 +199,27 @@ Examples:
     )
 
     parser.add_argument(
-        "--quote",
+        "-q", "--quote",
         metavar="TEXT",
         required=True,
         help="Quote to visualize (required)"
     )
 
     parser.add_argument(
-        "--transcript",
+        "-t", "--transcript",
         metavar="URL",
         help="Transcript URL for theme extraction (optional)"
     )
 
     parser.add_argument(
-        "--style",
+        "-s", "--style",
         metavar="ID",
-        help="Art style ID (e.g., hopper, vermeer). Random if not specified."
+        choices=["elwell", "sloan", "hopper", "sorolla", "wyeth", "homer", "hasui", "vermeer"],
+        help="Art style: elwell, sloan, hopper, sorolla, wyeth, homer, hasui, vermeer. Random if not specified."
     )
 
     parser.add_argument(
-        "--llm",
+        "-l", "--llm",
         choices=["gemini", "claude", "codex"],
         help="LLM provider for concept generation"
     )

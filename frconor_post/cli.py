@@ -349,10 +349,10 @@ def main():
         epilog="""
 Examples:
   frcmed-post                           # Interactive mode
-  frcmed-post --llm gemini              # Use Gemini for quotes
-  frcmed-post --style hopper            # Use Edward Hopper style
-  frcmed-post --quote "Your quote"      # Skip quote generation
-  frcmed-post --history                 # View post history
+  frcmed-post -l gemini                 # Use Gemini for quotes
+  frcmed-post -s hopper                 # Use Edward Hopper style
+  frcmed-post -q "Your quote"           # Skip quote generation
+  frcmed-post -H                        # View post history
         """
     )
 
@@ -363,43 +363,44 @@ Examples:
     )
 
     parser.add_argument(
-        "--llm",
+        "-l", "--llm",
         choices=["gemini", "claude", "codex"],
         help="LLM provider for quote generation"
     )
 
     parser.add_argument(
-        "--apple",
+        "-a", "--apple",
         metavar="URL",
         help="Apple Podcasts URL"
     )
 
     parser.add_argument(
-        "--spotify",
+        "-p", "--spotify",
         metavar="URL",
         help="Spotify URL"
     )
 
     parser.add_argument(
-        "--transcript",
+        "-t", "--transcript",
         metavar="URL",
         help="Transcript URL"
     )
 
     parser.add_argument(
-        "--quote",
+        "-q", "--quote",
         metavar="TEXT",
         help="Use this quote directly (skips quote generation)"
     )
 
     parser.add_argument(
-        "--style",
+        "-s", "--style",
         metavar="ID",
-        help="Art style ID (e.g., hopper, vermeer, hasui)"
+        choices=["elwell", "sloan", "hopper", "sorolla", "wyeth", "homer", "hasui", "vermeer"],
+        help="Art style: elwell, sloan, hopper, sorolla, wyeth, homer, hasui, vermeer"
     )
 
     parser.add_argument(
-        "--history",
+        "-H", "--history",
         action="store_true",
         help="Show post history"
     )
