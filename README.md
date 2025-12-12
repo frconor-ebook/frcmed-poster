@@ -31,6 +31,8 @@ pip install -e .
 
 ## Usage
 
+### Full Post Generation (`frcmed-post`)
+
 ```bash
 # Interactive mode (recommended)
 frcmed-post
@@ -42,6 +44,9 @@ frcmed-post --llm claude
 # Override art style
 frcmed-post --style hopper
 
+# Skip quote generation with your own quote
+frcmed-post --quote "Your custom quote here"
+
 # Provide URLs directly
 frcmed-post --apple "https://podcasts.apple.com/..." \
             --spotify "https://open.spotify.com/..." \
@@ -51,15 +56,44 @@ frcmed-post --apple "https://podcasts.apple.com/..." \
 frcmed-post --history
 ```
 
-## Workflow
+### Standalone Image Generation (`frcmed-image`)
+
+Generate meditation images directly from a quote without the full post workflow:
+
+```bash
+# Basic usage (quote only, random style)
+frcmed-image --quote "Peace begins with a pause."
+
+# With transcript for theme extraction
+frcmed-image --quote "..." --transcript "https://frconor-ebook.github.io/..."
+
+# Specify art style
+frcmed-image --quote "..." --style hopper
+
+# Use specific LLM for concept generation
+frcmed-image --quote "..." --llm claude
+```
+
+## Workflows
+
+### `frcmed-post` (Full Post)
 
 1. **Input URLs** - Provide Apple Podcasts, Spotify, and transcript URLs
 2. **Fetch Transcript** - Downloads and parses the meditation transcript
-3. **Generate Quotes** - LLM generates 15 hooks in various creative styles
+3. **Generate Quotes** - LLM generates 15 hooks (or use `--quote` to skip)
 4. **Select Quote** - Choose from the generated options
 5. **Build Image Prompt** - Constructs prompt based on quote and art style
 6. **Compose Post** - Assembles final WhatsApp post
 7. **Output** - Copies text to clipboard, saves to history
+
+### `frcmed-image` (Standalone Image)
+
+1. **Input** - Provide quote (required) and transcript URL (optional)
+2. **Extract Themes** - Parses transcript for themes (if URL provided)
+3. **Select Style** - Use specified style or random selection
+4. **Generate Concepts** - LLM generates 3 image scene concepts
+5. **Pick Concept** - Choose from concepts or regenerate
+6. **Generate Image** - Creates image via Claude CLI + nano-banana MCP
 
 ## Configuration
 
@@ -86,17 +120,19 @@ Eight painter styles with prompt elements:
 
 ```
 frcmed-poster/
-├── frconor_post/          # Main Python package
-│   ├── cli.py             # CLI entry point
-│   ├── quote_generator.py # LLM integration
-│   ├── fetcher.py         # Transcript fetching
-│   ├── image_generator.py # Image prompt construction
-│   ├── composer.py        # Post composition
-│   └── output.py          # Clipboard & history
-├── config/                # Configuration files
-├── prompts/               # LLM prompt templates
-├── state/                 # Runtime state (gitignored)
-└── output/                # Generated images (gitignored)
+├── frconor_post/              # Main Python package
+│   ├── cli.py                 # frcmed-post entry point
+│   ├── image_cli.py           # frcmed-image entry point
+│   ├── quote_generator.py     # LLM hook generation
+│   ├── concept_generator.py   # LLM image concept generation
+│   ├── fetcher.py             # Transcript fetching
+│   ├── image_generator.py     # Image prompt construction
+│   ├── composer.py            # Post composition
+│   └── output.py              # Clipboard & history
+├── config/                    # Configuration files
+├── prompts/                   # LLM prompt templates
+├── state/                     # Runtime state (gitignored)
+└── output/                    # Generated images (gitignored)
 ```
 
 ## License
