@@ -38,22 +38,22 @@ pip install -e .
 frcmed-post
 
 # Specify LLM provider
-frcmed-post --llm gemini
-frcmed-post --llm claude
+frcmed-post -l gemini
+frcmed-post -l claude
 
-# Override art style
-frcmed-post --style hopper
+# Override art style (elwell|sloan|hopper|sorolla|wyeth|homer|hasui|vermeer)
+frcmed-post -s hopper
 
 # Skip quote generation with your own quote
-frcmed-post --quote "Your custom quote here"
+frcmed-post -q "Your custom quote here"
 
 # Provide URLs directly
-frcmed-post --apple "https://podcasts.apple.com/..." \
-            --spotify "https://open.spotify.com/..." \
-            --transcript "https://frconor-ebook.github.io/..."
+frcmed-post -a "https://podcasts.apple.com/..." \
+            -p "https://open.spotify.com/..." \
+            -t "https://frconor-ebook.github.io/..."
 
 # View post history
-frcmed-post --history
+frcmed-post -H
 ```
 
 ### Standalone Image Generation (`frcmed-image`)
@@ -62,16 +62,16 @@ Generate meditation images directly from a quote without the full post workflow:
 
 ```bash
 # Basic usage (quote only, random style)
-frcmed-image --quote "Peace begins with a pause."
+frcmed-image -q "Peace begins with a pause."
 
 # With transcript for theme extraction
-frcmed-image --quote "..." --transcript "https://frconor-ebook.github.io/..."
+frcmed-image -q "..." -t "https://frconor-ebook.github.io/..."
 
-# Specify art style
-frcmed-image --quote "..." --style hopper
+# Specify art style (elwell|sloan|hopper|sorolla|wyeth|homer|hasui|vermeer)
+frcmed-image -q "..." -s hopper
 
 # Use specific LLM for concept generation
-frcmed-image --quote "..." --llm claude
+frcmed-image -q "..." -l claude
 ```
 
 ## Workflows

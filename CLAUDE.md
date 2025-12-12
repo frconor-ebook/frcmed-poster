@@ -9,18 +9,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 pip install -e .
 
 # Full post generation (frcmed-post)
-frcmed-post                           # Interactive mode
-frcmed-post --help                    # Show all options
-frcmed-post --history                 # View post history
-frcmed-post --llm gemini              # Use specific LLM (gemini|claude|codex)
-frcmed-post --style hopper            # Override art style
-frcmed-post --quote "Your quote"      # Skip quote generation
+frcmed-post                    # Interactive mode
+frcmed-post --help             # Show all options
+frcmed-post -H                 # View post history
+frcmed-post -l gemini          # Use specific LLM (gemini|claude|codex)
+frcmed-post -s hopper          # Override art style
+frcmed-post -q "Your quote"    # Skip quote generation
 
 # Standalone image generation (frcmed-image)
-frcmed-image --quote "Peace begins with a pause."   # Quote only, random style
-frcmed-image --quote "..." --transcript URL         # With theme extraction
-frcmed-image --quote "..." --style hopper           # Specific art style
-frcmed-image --quote "..." --llm claude             # Use Claude for concepts
+frcmed-image -q "Peace begins with a pause."   # Quote only, random style
+frcmed-image -q "..." -t URL                   # With theme extraction
+frcmed-image -q "..." -s hopper                # Specific art style
+frcmed-image -q "..." -l claude                # Use Claude for concepts
+
+# Shorthand flags:
+# -q/--quote, -t/--transcript, -s/--style, -l/--llm
+# -a/--apple, -p/--spotify, -H/--history (frcmed-post only)
 ```
 
 ## Architecture
