@@ -19,6 +19,7 @@ from .image_generator import (
     build_image_prompt,
     ensure_output_directory,
     format_image_prompt_display,
+    generate_images,
 )
 from .output import finalize_post, format_success_message
 from .quote_generator import format_hooks_display, generate_quotes
@@ -187,18 +188,50 @@ def run_workflow(args):
     print_section("STEP 4: IMAGE GENERATION")
 
     # Determine art style
+    all_styles = load_art_styles().get("rotation", [])
+    rotation_index = state.get("style_rotation_index", 0)
+    default_style = get_current_art_style()
+
     if args.style:
+        # Use command-line specified style
         style = get_art_style_by_id(args.style)
         if not style:
             print(f"Unknown style: {args.style}")
-            styles = load_art_styles().get("rotation", [])
-            print(f"Available styles: {', '.join(s['id'] for s in styles)}")
+            print(f"Available styles: {', '.join(s['id'] for s in all_styles)}")
             sys.exit(1)
     else:
-        style = get_current_art_style()
-        rotation_index = state.get("style_rotation_index", 0)
-        print(f"Today's art style (rotation #{rotation_index + 1}): {style['name']}")
+        # Interactive style selection with rotation default
+        print("Available art styles:")
+        for i, s in enumerate(all_styles, 1):
+            default_marker = " (default - rotation)" if s['id'] == default_style['id'] else ""
+            print(f"  {i}. {s['name']}{default_marker}")
+        print()
 
+        style_choice = get_input(f"Select style [1-{len(all_styles)}] or Enter for default", "")
+
+        if style_choice:
+            try:
+                idx = int(style_choice) - 1
+                if 0 <= idx < len(all_styles):
+                    style = all_styles[idx]
+                    print(f"  Selected: {style['name']}")
+                else:
+                    print(f"  Invalid choice, using default: {default_style['name']}")
+                    style = default_style
+            except ValueError:
+                # Try matching by ID
+                style = get_art_style_by_id(style_choice)
+                if style:
+                    print(f"  Selected: {style['name']}")
+                else:
+                    print(f"  Invalid choice, using default: {default_style['name']}")
+                    style = default_style
+        else:
+            style = default_style
+            print(f"  Using rotation default: {style['name']}")
+
+    print()
+    print(f"Art style: {style['name']}")
     print(f"Theme alignment: {', '.join(style.get('mood_keywords', []))}")
     print()
 
@@ -211,21 +244,30 @@ def run_workflow(args):
 
     print(format_image_prompt_display(image_prompt))
 
-    # Note about image generation
-    print()
-    print("NOTE: Image generation uses nano-banana MCP.")
-    print("To generate images, run this tool via Claude Code:")
-    print("  claude -p \"Generate 3 images with: [prompt above]\"")
-    print()
-
-    # For now, we'll skip automatic image generation and let user handle it
     output_dir = ensure_output_directory()
     print(f"Images will be saved to: {output_dir}")
+    print()
 
-    # Ask if user wants to proceed without images
+    # Generate images using Claude CLI + nano-banana MCP
+    generate = get_input("Generate images now? [y/n]", "y")
+    if generate.lower() == 'y':
+        print()
+        print("Generating images via Claude CLI (this may take a minute)...")
+        success = generate_images(image_prompt)
+        if success:
+            print("  Images generated successfully!")
+        else:
+            print("  Image generation failed. You can generate manually later.")
+    else:
+        print()
+        print("Skipping image generation.")
+        print("To generate later, run:")
+        print(f"  claude -p \"Generate {image_prompt.n} images with: [prompt above]\"")
+
+    print()
     proceed = get_input("Proceed to compose post? [y/n]", "y")
     if proceed.lower() != 'y':
-        print("Stopping here. You can generate images manually and run again.")
+        print("Stopping here.")
         sys.exit(0)
 
     # Step 5: Compose post

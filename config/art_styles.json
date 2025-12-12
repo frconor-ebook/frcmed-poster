@@ -34,7 +34,7 @@
       "mood_keywords": ["solitude", "contemplation", "isolation", "light and shadow"],
       "prompt_elements": {
         "style_description": "in the style of Edward Hopper, American realist known for dramatic light and contemplative solitude",
-        "color_palette": "stark contrasts, warm interior light against cool shadows, muted urban colors",
+        "color_palette": "base of grays, beiges, and muted greens with shadowy light; accent with rusty red/red-orange on dresses, signage, or furniture for visual focus; muted yellow for lampshades and sunlit walls; occasional bright green on awnings or trim for eerie contrast",
         "composition": "single figures in architectural spaces, strong geometric shapes, dramatic window light",
         "avoid": "crowds, busy scenes, pastoral settings"
       }

@@ -1,6 +1,6 @@
 """Image generation module - constructs prompts for nano-banana MCP."""
 
-from datetime import date
+import subprocess
 from pathlib import Path
 from typing import NamedTuple
 
@@ -127,3 +127,48 @@ Prompt:
 {image_prompt.prompt}
 {'-' * 40}
 """
+
+
+def generate_images(image_prompt: ImagePrompt) -> bool:
+    """Generate images using Claude CLI with nano-banana MCP.
+
+    Args:
+        image_prompt: The ImagePrompt containing prompt and generation settings
+
+    Returns:
+        True if generation succeeded, False otherwise
+    """
+    # Build the Claude prompt that will invoke nano-banana
+    claude_prompt = f"""Generate {image_prompt.n} images with these settings:
+- Aspect ratio: {image_prompt.aspect_ratio}
+- Model tier: {image_prompt.model_tier}
+- Resolution: {image_prompt.resolution}
+
+Prompt:
+{image_prompt.prompt}"""
+
+    try:
+        # Call claude -p with the prompt
+        # Use longer timeout for image generation (5 minutes)
+        result = subprocess.run(
+            ["claude", "-p", claude_prompt],
+            capture_output=True,
+            text=True,
+            timeout=300
+        )
+
+        if result.returncode != 0:
+            print(f"  Error: {result.stderr}")
+            return False
+
+        return True
+
+    except FileNotFoundError:
+        print("  Error: Claude CLI not found. Make sure 'claude' is in your PATH.")
+        return False
+    except subprocess.TimeoutExpired:
+        print("  Error: Image generation timed out (5 min limit).")
+        return False
+    except Exception as e:
+        print(f"  Error: {e}")
+        return False
