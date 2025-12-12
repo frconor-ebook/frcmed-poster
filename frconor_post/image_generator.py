@@ -93,6 +93,64 @@ def build_image_prompt(
     )
 
 
+def build_image_prompt_from_concept(
+    concept,  # Concept from concept_generator
+    style: dict
+) -> ImagePrompt:
+    """Build an image generation prompt from a selected concept and style.
+
+    Args:
+        concept: The selected Concept object (from concept_generator)
+        style: Art style dict from art_styles.json
+
+    Returns:
+        ImagePrompt ready for nano-banana MCP
+    """
+    settings = load_settings()
+    image_config = settings.get("image_generation", {})
+
+    # Extract style elements
+    prompt_elements = style.get("prompt_elements", {})
+    style_desc = prompt_elements.get("style_description", "")
+    color_palette = prompt_elements.get("color_palette", "")
+    composition = prompt_elements.get("composition", "")
+    avoid = prompt_elements.get("avoid", "")
+
+    # Build the prompt from concept
+    prompt_parts = [
+        f"Create an image {style_desc}.",
+        "",
+        "Scene Description:",
+        f"- Setting: {concept.setting}",
+        f"- {concept.scene}",
+        f"- Mood: {concept.mood}",
+        f"- Key visual elements: {concept.elements}",
+        "",
+        "Visual Specifications:",
+        f"- Color palette: {color_palette}",
+        f"- Composition approach: {composition}",
+        f"- Must avoid: {avoid}",
+        "",
+        "Technical Requirements:",
+        "- Apply rule of thirds, position key elements along grid lines",
+        "- 1-3 human figures maximum as primary subjects",
+        "- No text, watermarks, or signatures in the image",
+        "- Secular scene only (no explicitly religious iconography)",
+    ]
+
+    prompt = "\n".join(prompt_parts)
+
+    return ImagePrompt(
+        prompt=prompt,
+        style_id=style.get("id", "unknown"),
+        style_name=style.get("name", "Unknown"),
+        model_tier=image_config.get("model_tier", "pro"),
+        resolution=image_config.get("resolution", "high"),
+        aspect_ratio=image_config.get("aspect_ratio", "4:3"),
+        n=image_config.get("variations_count", 3)
+    )
+
+
 def get_output_path() -> Path:
     """Get the output directory path (~/Desktop)."""
     return get_output_dir()

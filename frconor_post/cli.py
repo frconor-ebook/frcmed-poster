@@ -142,47 +142,56 @@ def run_workflow(args):
     else:
         print("  (Using original URL)")
 
-    # Step 3: Generate quotes
+    # Step 3: Generate quotes (or use provided quote)
     print_section("STEP 3: QUOTE OPTIONS")
 
-    transcript_excerpt = get_transcript_excerpt(transcript.text)
+    if args.quote:
+        # Use provided quote directly
+        selected_quote = args.quote
+        print(f"Using provided quote:")
+        print(f"  \"{selected_quote}\"")
+    else:
+        # Generate quotes via LLM
+        transcript_excerpt = get_transcript_excerpt(transcript.text)
 
-    try:
-        print(f"Generating 15 hooks using {llm_provider}...")
-        hooks = generate_quotes(episode_title, transcript_excerpt, llm_provider)
-        print(f"✓ Generated {len(hooks)} hooks")
-        print()
-        print(format_hooks_display(hooks))
-    except Exception as e:
-        print(f"✗ Failed to generate quotes: {e}")
-        print("  You may need to configure the LLM CLI tool.")
-        sys.exit(1)
-
-    # User selection
-    print()
-    print("─" * 40)
-    selected_hook = None
-
-    while selected_hook is None:
-        choice = get_input("Enter hook number (1-15), [r]egenerate, or [q]uit")
-
-        if choice.lower() == 'q':
-            print("Cancelled.")
-            sys.exit(0)
-        elif choice.lower() == 'r':
-            print("\nRegenerating hooks...")
+        try:
+            print(f"Generating 15 hooks using {llm_provider}...")
             hooks = generate_quotes(episode_title, transcript_excerpt, llm_provider)
+            print(f"✓ Generated {len(hooks)} hooks")
+            print()
             print(format_hooks_display(hooks))
-        else:
-            try:
-                num = int(choice)
-                if 1 <= num <= len(hooks):
-                    selected_hook = hooks[num - 1]
-                    print(f"\n✓ Selected: \"{selected_hook.text}\"")
-                else:
-                    print(f"Please enter a number between 1 and {len(hooks)}")
-            except ValueError:
-                print("Invalid input. Enter a number, 'r', or 'q'.")
+        except Exception as e:
+            print(f"✗ Failed to generate quotes: {e}")
+            print("  You may need to configure the LLM CLI tool.")
+            sys.exit(1)
+
+        # User selection
+        print()
+        print("─" * 40)
+        selected_hook = None
+
+        while selected_hook is None:
+            choice = get_input("Enter hook number (1-15), [r]egenerate, or [q]uit")
+
+            if choice.lower() == 'q':
+                print("Cancelled.")
+                sys.exit(0)
+            elif choice.lower() == 'r':
+                print("\nRegenerating hooks...")
+                hooks = generate_quotes(episode_title, transcript_excerpt, llm_provider)
+                print(format_hooks_display(hooks))
+            else:
+                try:
+                    num = int(choice)
+                    if 1 <= num <= len(hooks):
+                        selected_hook = hooks[num - 1]
+                        print(f"\n✓ Selected: \"{selected_hook.text}\"")
+                    else:
+                        print(f"Please enter a number between 1 and {len(hooks)}")
+                except ValueError:
+                    print("Invalid input. Enter a number, 'r', or 'q'.")
+
+        selected_quote = selected_hook.text
 
     # Step 4: Image generation
     print_section("STEP 4: IMAGE GENERATION")
@@ -237,7 +246,7 @@ def run_workflow(args):
 
     # Build image prompt
     image_prompt = build_image_prompt(
-        quote=selected_hook.text,
+        quote=selected_quote,
         themes=transcript.themes,
         style_id=style.get("id")
     )
@@ -274,7 +283,7 @@ def run_workflow(args):
     print_section("STEP 5: COMPOSE & PREVIEW")
 
     post = compose_post(
-        hook=selected_hook.text,
+        hook=selected_quote,
         episode_title=episode_title,
         apple_url=apple_url,
         spotify_url=spotify_url,
@@ -339,10 +348,11 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  frcmed-post                    # Interactive mode
-  frcmed-post --llm gemini       # Use Gemini for quotes
-  frcmed-post --style hopper     # Use Edward Hopper style
-  frcmed-post --history          # View post history
+  frcmed-post                           # Interactive mode
+  frcmed-post --llm gemini              # Use Gemini for quotes
+  frcmed-post --style hopper            # Use Edward Hopper style
+  frcmed-post --quote "Your quote"      # Skip quote generation
+  frcmed-post --history                 # View post history
         """
     )
 
@@ -374,6 +384,12 @@ Examples:
         "--transcript",
         metavar="URL",
         help="Transcript URL"
+    )
+
+    parser.add_argument(
+        "--quote",
+        metavar="TEXT",
+        help="Use this quote directly (skips quote generation)"
     )
 
     parser.add_argument(
