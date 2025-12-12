@@ -6,6 +6,7 @@ CLI tool for generating WhatsApp posts for the "Fr. Conor Meditation Updates" ch
 
 - **Quote Generation**: Generates 15 creative hooks from meditation transcripts using LLMs (Gemini, Claude, or Codex)
 - **Art Style Rotation**: 8 painter styles (Hopper, Vermeer, Sorolla, etc.) rotate automatically
+- **Comic Strip Generation**: 4-panel comic strips with 7 artistic styles and thought-provoking dialogue
 - **Image Prompts**: Constructs detailed prompts for AI image generation
 - **URL Shortening**: Integrates with TinyURL for transcript links
 - **Post History**: Tracks all generated posts with full metadata
@@ -74,6 +75,21 @@ frcmed-image -q "..." -s hopper
 frcmed-image -q "..." -l claude
 ```
 
+### 4-Panel Comic Strip Generation (`frcmed-comic`)
+
+Generate 4-panel comic strips with thought-provoking dialogue from meditation transcripts:
+
+```bash
+# Basic usage (transcript required, random style)
+frcmed-comic -t "https://frconor-ebook.github.io/..."
+
+# Specify comic style (moebius|watercolor|baroque|expressionist|minimalist|deco|woodcut)
+frcmed-comic -t URL -s moebius
+
+# Use specific LLM for concept generation
+frcmed-comic -t URL -l claude
+```
+
 ## Workflows
 
 ### `frcmed-post` (Full Post)
@@ -94,6 +110,16 @@ frcmed-image -q "..." -l claude
 4. **Generate Concepts** - LLM generates 3 image scene concepts
 5. **Pick Concept** - Choose from concepts or regenerate
 6. **Generate Image** - Creates image via Claude CLI + nano-banana MCP
+
+### `frcmed-comic` (4-Panel Comic)
+
+1. **Input** - Provide transcript URL (required)
+2. **Fetch Transcript** - Downloads and parses the meditation transcript
+3. **Select Style** - Use specified comic style or random selection
+4. **Generate Concepts** - LLM generates 4 comic strip concepts with dialogue
+5. **Pick Concept** - Choose from concepts (1-4), regenerate (r), or quit (q)
+6. **Build Prompt** - Constructs 4-panel comic prompt with dialogue instructions
+7. **Generate Comic** - Creates comic via Claude CLI + nano-banana MCP
 
 ## Configuration
 
@@ -116,6 +142,17 @@ Eight painter styles with prompt elements:
 - `hasui` - Kawase Hasui (Japanese Shin Hanga)
 - `vermeer` - Johannes Vermeer (Dutch Golden Age)
 
+### Comic Styles (`config/comic_styles.json`)
+
+Seven comic strip styles with dialogue support:
+- `moebius` - Painterly European Graphic Novel (Moebius, Schuiten, Gibrat)
+- `watercolor` - Watercolor Impressionist (Jillian Tamaki, Ghibli)
+- `baroque` - Neo-Baroque Chiaroscuro (Rembrandt, Doré)
+- `expressionist` - Expressionist Ink & Brush (Steadman, Egon Schiele)
+- `minimalist` - Minimalist Conceptual (Tom Gauld, Anders Nilsen)
+- `deco` - Art-Deco/Art-Nouveau Fusion (Mucha, Klimt)
+- `woodcut` - Woodcut-Inspired Digital Engraving (Dürer, Lynd Ward)
+
 ## Project Structure
 
 ```
@@ -123,8 +160,10 @@ frcmed-poster/
 ├── frconor_post/              # Main Python package
 │   ├── cli.py                 # frcmed-post entry point
 │   ├── image_cli.py           # frcmed-image entry point
+│   ├── comic_cli.py           # frcmed-comic entry point
 │   ├── quote_generator.py     # LLM hook generation
 │   ├── concept_generator.py   # LLM image concept generation
+│   ├── comic_generator.py     # LLM comic concept generation
 │   ├── fetcher.py             # Transcript fetching
 │   ├── image_generator.py     # Image prompt construction
 │   ├── composer.py            # Post composition

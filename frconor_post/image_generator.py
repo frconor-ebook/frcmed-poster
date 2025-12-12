@@ -151,6 +151,89 @@ def build_image_prompt_from_concept(
     )
 
 
+def build_comic_prompt(
+    concept,  # ComicConcept from comic_generator
+    style: dict
+) -> ImagePrompt:
+    """Build a 4-panel comic strip image prompt from a concept and style.
+
+    Args:
+        concept: The selected ComicConcept object (from comic_generator)
+        style: Comic style dict from comic_styles.json
+
+    Returns:
+        ImagePrompt ready for nano-banana MCP
+    """
+    settings = load_settings()
+    image_config = settings.get("image_generation", {})
+
+    # Extract style elements
+    prompt_elements = style.get("prompt_elements", {})
+    style_desc = prompt_elements.get("style_description", "")
+    linework = prompt_elements.get("linework", "")
+    color = prompt_elements.get("color", "")
+    composition = prompt_elements.get("composition", "")
+    technique = prompt_elements.get("technique", "")
+
+    # Build the prompt for 4-panel comic with dialogue
+    prompt_parts = [
+        f"Create a 4-panel horizontal comic strip {style_desc}.",
+        "",
+        f"Comic Title: {concept.title}",
+        f"Narrative Arc: {concept.arc}",
+        "",
+        "Panel Layout (left to right) with DIALOGUE:",
+        "",
+        f"PANEL 1:",
+        f"  Scene: {concept.panel_1}",
+        f"  Text: {concept.dialogue_1}",
+        "",
+        f"PANEL 2:",
+        f"  Scene: {concept.panel_2}",
+        f"  Text: {concept.dialogue_2}",
+        "",
+        f"PANEL 3:",
+        f"  Scene: {concept.panel_3}",
+        f"  Text: {concept.dialogue_3}",
+        "",
+        f"PANEL 4:",
+        f"  Scene: {concept.panel_4}",
+        f"  Text: {concept.dialogue_4}",
+        "",
+        "Comic Text Elements:",
+        "- SPEECH balloons: oval with tail pointing to speaker",
+        "- THOUGHT balloons: cloud-like with bubble trail",
+        "- CAPTION boxes: rectangular boxes for narration",
+        "- Text must be legible and properly placed within panels",
+        "",
+        "Art Style Specifications:",
+        f"- Linework: {linework}",
+        f"- Color approach: {color}",
+        f"- Composition: {composition}",
+        f"- Technique: {technique}",
+        "",
+        "Technical Requirements:",
+        "- 4 panels in a single horizontal strip layout",
+        "- Clear panel borders/gutters between panels",
+        "- Consistent character design across all panels",
+        "- 1-3 human figures as subjects",
+        "- Include speech/thought balloons with the specified dialogue",
+        "- Secular scene only (no religious iconography)",
+    ]
+
+    prompt = "\n".join(prompt_parts)
+
+    return ImagePrompt(
+        prompt=prompt,
+        style_id=style.get("id", "unknown"),
+        style_name=style.get("name", "Unknown"),
+        model_tier=image_config.get("model_tier", "pro"),
+        resolution=image_config.get("resolution", "high"),
+        aspect_ratio="21:9",  # Wide aspect ratio for 4-panel strip
+        n=image_config.get("variations_count", 3)
+    )
+
+
 def get_output_path() -> Path:
     """Get the output directory path (~/Desktop)."""
     return get_output_dir()

@@ -1,0 +1,88 @@
+{
+  "styles": [
+    {
+      "id": "moebius",
+      "name": "Painterly European Graphic Novel",
+      "artists": ["Moebius", "François Schuiten", "Jean-Pierre Gibrat", "Enki Bilal"],
+      "prompt_elements": {
+        "style_description": "in the style of Moebius and European graphic novels, with clean confident contours, cinematic staging, and atmospheric color",
+        "linework": "confident continuous contours with selective line breaks, 2-4 line weights, heavier outer contours for figures, thinner for backgrounds",
+        "color": "mid-tone wash base, limited palette of 6-12 colors, atmospheric perspective with cooler distant elements, watercolor/gouache feel with paper grain",
+        "composition": "cinematic blocking with strong foreground shapes, negative space for breathing room, single primary light direction per panel",
+        "technique": "finished painting surfaces without losing line clarity, elegant slightly elongated proportions, expressive hands"
+      }
+    },
+    {
+      "id": "watercolor",
+      "name": "Watercolor Impressionist Comics",
+      "artists": ["Jillian Tamaki", "Manuele Fior", "Studio Ghibli", "Shaun Tan"],
+      "prompt_elements": {
+        "style_description": "in watercolor impressionist comic style like Jillian Tamaki or Ghibli backgrounds, with loose intentional lines and emotional color washes",
+        "linework": "very light pencil-like lines that disappear into paint, or thin delicate incomplete ink lines, gesture-first drawing",
+        "color": "wet-on-wet watercolor blooms, emotional palette per panel, local color looseness (skin can be lavender, shadows can be teal), saturated accents for story beats",
+        "composition": "generous margins, soft backgrounds, paper as environment, lost-and-found edges dissolving into washes",
+        "technique": "watercolor behaviors - blooms, granulation, dry-brush texture, controlled backruns, big value groupings not careful shading"
+      }
+    },
+    {
+      "id": "baroque",
+      "name": "Neo-Baroque Chiaroscuro",
+      "artists": ["Rembrandt", "Caravaggio", "Gustave Doré", "Bernie Wrightson"],
+      "prompt_elements": {
+        "style_description": "in neo-baroque chiaroscuro style inspired by Rembrandt and Gustave Doré, with strong dramatic lighting and sculptural forms",
+        "linework": "line as structure not decoration, defining major plane breaks, optional subtle crosshatch or etched grain in midtones",
+        "color": "single-source spotlight lighting, true blacks and near-white highlights, subsurface warmth in lit skin with cooler shadows",
+        "composition": "triangular classical compositions, figures in pyramids, dark soft minimal backgrounds, focus on faces and hands",
+        "technique": "chiaroscuro blocking with shadow masses first then carve light, rim light for silhouette separation, old master gravity"
+      }
+    },
+    {
+      "id": "expressionist",
+      "name": "Expressionist Ink & Brush",
+      "artists": ["Ralph Steadman", "Egon Schiele", "Bill Sienkiewicz", "Kathe Kollwitz"],
+      "prompt_elements": {
+        "style_description": "in expressionist ink and brush style like Ralph Steadman or Egon Schiele, with bold strokes, controlled distortion, and psychological energy",
+        "linework": "brush-first thinking with variable stroke width, economy of strokes (5-15 decisive strokes per figure), intentional distortion",
+        "color": "minimal color - one accent hue or 2-3 washes maximum, color as rough stains that ignore edges slightly",
+        "composition": "asymmetry, off-center subjects, tilted horizons, uneven margins, gesture and stroke direction communicating emotion",
+        "technique": "dry brush scratch texture, ink wash pools that bleed, controlled splatter in designated zones, negative space as active shape"
+      }
+    },
+    {
+      "id": "minimalist",
+      "name": "Minimalist Conceptual Comics",
+      "artists": ["Tom Gauld", "Anders Nilsen", "Chris Ware", "Edward Gorey"],
+      "prompt_elements": {
+        "style_description": "in minimalist conceptual comic style like Tom Gauld, with sparse lines, simple geometric shapes, and high clarity",
+        "linework": "uniform stroke weight throughout, geometric reduction of characters to circles/ovals/rectangles, simplified hands",
+        "color": "1-3 flat colors plus black line maximum, no gradients, color as categorization or mood cue",
+        "composition": "white space as environment, strict grid alignment, consistent baseline height, minimal props to establish location",
+        "technique": "icon library approach with repeatable symbols, text-first layout, style sheet consistency across all panels"
+      }
+    },
+    {
+      "id": "deco",
+      "name": "Art-Deco/Art-Nouveau Fusion",
+      "artists": ["Alphonse Mucha", "Aubrey Beardsley", "Gustav Klimt", "Tamara de Lempicka"],
+      "prompt_elements": {
+        "style_description": "in Art-Deco and Art-Nouveau fusion style like Mucha and Klimt, with ornamental borders, stylized silhouettes, and decorative patterns",
+        "linework": "two-mode line system - clean confident figure outlines with thinner intricate ornamental lines, vines halos sunbursts fan patterns",
+        "color": "flat colors with metallic gold accents, jewel tones (emerald sapphire garnet) with cream and black, pattern fills in clothing/backgrounds",
+        "composition": "decorative framing that echoes panel ideas, symmetry and centered figures, borders as integral design elements",
+        "technique": "Nouveau flowing S-curves for hair/fabric, Deco stepped geometry and radiating arcs, poster clarity with clean edges"
+      }
+    },
+    {
+      "id": "woodcut",
+      "name": "Woodcut-Inspired Digital Engraving",
+      "artists": ["Albrecht Dürer", "Gustave Doré", "Lynd Ward", "Frans Masereel"],
+      "prompt_elements": {
+        "style_description": "in woodcut engraving style inspired by Dürer and Lynd Ward, with carved line texture, high contrast, and directional hatching",
+        "linework": "carving logic where every mark feels cut with a gouge, tapered cuts with consistent directionality, hatching direction per plane",
+        "color": "black and white primarily, line spacing controls value (sparse for light, dense for midtones, solid black with white cuts for darks)",
+        "composition": "bold staging with simple compositions, big shapes and clear depth layers, stylized line patterns for sky/foliage/water",
+        "technique": "strong readable silhouettes first, spot blacks to anchor composition, paper grain texture, slight ink unevenness for printed feel"
+      }
+    }
+  ]
+}

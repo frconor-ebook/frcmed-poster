@@ -18,6 +18,7 @@ dependencies = [
 [project.scripts]
 frcmed-post = "frconor_post.cli:main"
 frcmed-image = "frconor_post.image_cli:main"
+frcmed-comic = "frconor_post.comic_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]

@@ -22,6 +22,11 @@ frcmed-image -q "..." -t URL                   # With theme extraction
 frcmed-image -q "..." -s hopper                # Specific art style
 frcmed-image -q "..." -l claude                # Use Claude for concepts
 
+# 4-panel comic generation (frcmed-comic)
+frcmed-comic -t URL                            # Transcript required, random style
+frcmed-comic -t URL -s moebius                 # Specific comic style
+frcmed-comic -t URL -l claude                  # Use Claude for concepts
+
 # Shorthand flags:
 # -q/--quote, -t/--transcript, -s/--style, -l/--llm
 # -a/--apple, -p/--spotify, -H/--history (frcmed-post only)
@@ -49,16 +54,28 @@ This is a CLI tool that generates WhatsApp posts for a meditation podcast channe
 5. **Selection**: User picks concept or regenerates
 6. **Generation**: Creates image via Claude CLI + nano-banana MCP
 
+### `frcmed-comic` Workflow (4-Panel Comic)
+
+1. **Input**: Transcript URL (required)
+2. **Fetch**: Downloads transcript, extracts themes
+3. **Style**: Use specified comic style or random from 7 styles
+4. **Concepts**: LLM generates 4 comic strip concepts with dialogue
+5. **Selection**: User picks concept (1-4), regenerates (r), or quits (q)
+6. **Prompt**: Builds 4-panel comic prompt with dialogue instructions
+7. **Generation**: Creates comic via Claude CLI + nano-banana MCP (21:9 aspect ratio)
+
 ### Key Modules
 
 | Module | Responsibility |
 |--------|----------------|
 | `cli.py` | `frcmed-post` entry point, orchestrates full post workflow |
 | `image_cli.py` | `frcmed-image` entry point, standalone image generation |
+| `comic_cli.py` | `frcmed-comic` entry point, 4-panel comic generation |
 | `quote_generator.py` | LLM abstraction - generates 15 hooks from transcript |
 | `concept_generator.py` | LLM abstraction - generates 3 image concepts from quote |
+| `comic_generator.py` | LLM abstraction - generates 4 comic concepts with dialogue |
 | `fetcher.py` | HTTP fetch from GitHub Pages, BeautifulSoup parsing, theme extraction |
-| `image_generator.py` | Builds image prompts using art style definitions |
+| `image_generator.py` | Builds image/comic prompts using art style definitions |
 | `config.py` | Loads JSON configs, manages art style rotation state |
 | `output.py` | Clipboard (pbcopy), file I/O, history logging |
 
@@ -66,8 +83,10 @@ This is a CLI tool that generates WhatsApp posts for a meditation podcast channe
 
 - `config/settings.json` - LLM provider, URL shortener path, output preferences
 - `config/art_styles.json` - 8 art styles with prompt elements (elwell, sloan, hopper, sorolla, wyeth, homer, hasui, vermeer)
+- `config/comic_styles.json` - 7 comic styles with prompt elements (moebius, watercolor, baroque, expressionist, minimalist, deco, woodcut)
 - `prompts/quote_generation.md` - Template for 15-hook generation with rhetorical styles
 - `prompts/concept_generation.md` - Template for 3 image concept generation
+- `prompts/comic_generation.md` - Template for 4-panel comic concept generation with dialogue
 - `state/state.json` - Art style rotation index, post count (gitignored)
 - `state/post_history.json` - Log of all generated posts (gitignored)
 
