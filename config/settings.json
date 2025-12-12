@@ -1,0 +1,43 @@
+{
+  "llm": {
+    "quote_generation": {
+      "provider": "gemini",
+      "model": "gemini-2.5-pro",
+      "fallback_provider": "claude"
+    },
+    "providers": {
+      "gemini": {
+        "command": "gemini",
+        "model_flag": "--model",
+        "default_model": "gemini-2.5-pro"
+      },
+      "codex": {
+        "command": "codex",
+        "subcommand": "exec",
+        "default_model": null
+      },
+      "claude": {
+        "command": "claude",
+        "prompt_flag": "-p",
+        "default_model": null
+      }
+    }
+  },
+  "url_shortener": {
+    "script_path": "/Users/e_wijaya_ap/Desktop/upload_frcmed_to_web/meditations/preprocessing_scripts/frcmed_shorten_cli.py",
+    "enabled": true,
+    "cache_enabled": true
+  },
+  "output": {
+    "image_directory": "output",
+    "copy_to_clipboard": true,
+    "open_finder_after_generation": true
+  },
+  "image_generation": {
+    "variations_count": 3,
+    "model_tier": "pro",
+    "resolution": "high",
+    "aspect_ratio": "4:3",
+    "retry_attempts": 2
+  }
+}

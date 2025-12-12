@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "frconor-post"
+version = "1.0.0"
+description = "CLI tool for generating Fr. Conor meditation WhatsApp posts"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.28.0",
+    "beautifulsoup4>=4.12",
+    "pyperclip>=1.8.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+frconor-post = "frconor_post.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["frconor_post*"]

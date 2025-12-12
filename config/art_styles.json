@@ -1,0 +1,108 @@
+{
+  "rotation": [
+    {
+      "id": "elwell",
+      "name": "Frederick William Elwell",
+      "period": "Victorian/Edwardian",
+      "cultural_fit": ["British", "European", "domestic"],
+      "mood_keywords": ["warm", "domestic", "contemplative", "intimate"],
+      "prompt_elements": {
+        "style_description": "in the style of Frederick William Elwell, Victorian-era British painter known for warm domestic interiors and intimate scenes",
+        "color_palette": "warm earth tones, soft natural light through windows, muted golds and browns",
+        "composition": "intimate interior scenes, figures engaged in quiet activity, soft chiaroscuro",
+        "avoid": "modern elements, harsh lighting, abstract forms"
+      }
+    },
+    {
+      "id": "sloan",
+      "name": "John French Sloan (Ashcan School)",
+      "period": "Early 20th Century American",
+      "cultural_fit": ["American", "urban", "working class"],
+      "mood_keywords": ["everyday life", "candid", "social realism", "authentic"],
+      "prompt_elements": {
+        "style_description": "in the style of John Sloan, Ashcan School painter capturing urban American life with warmth and authenticity",
+        "color_palette": "urban grays and browns with warm accent colors, gaslight ambiance",
+        "composition": "street scenes, rooftop views, ordinary people in daily activities",
+        "avoid": "idealized beauty, rural settings, aristocratic subjects"
+      }
+    },
+    {
+      "id": "hopper",
+      "name": "Edward Hopper",
+      "period": "20th Century American Realism",
+      "cultural_fit": ["American", "urban", "solitary"],
+      "mood_keywords": ["solitude", "contemplation", "isolation", "light and shadow"],
+      "prompt_elements": {
+        "style_description": "in the style of Edward Hopper, American realist known for dramatic light and contemplative solitude",
+        "color_palette": "stark contrasts, warm interior light against cool shadows, muted urban colors",
+        "composition": "single figures in architectural spaces, strong geometric shapes, dramatic window light",
+        "avoid": "crowds, busy scenes, pastoral settings"
+      }
+    },
+    {
+      "id": "sorolla",
+      "name": "Joaquin Sorolla",
+      "period": "Spanish Impressionism",
+      "cultural_fit": ["Mediterranean", "Spanish", "coastal"],
+      "mood_keywords": ["luminous", "joyful", "sunlit", "beach scenes"],
+      "prompt_elements": {
+        "style_description": "in the style of Joaquin Sorolla, Spanish master of light capturing Mediterranean brilliance",
+        "color_palette": "brilliant whites, sun-drenched colors, azure blues, warm skin tones",
+        "composition": "figures in bright sunlight, beach and garden scenes, flowing white fabrics",
+        "avoid": "dark interiors, northern European settings, somber moods"
+      }
+    },
+    {
+      "id": "wyeth",
+      "name": "Andrew Wyeth",
+      "period": "20th Century American Regionalism",
+      "cultural_fit": ["American", "rural", "New England"],
+      "mood_keywords": ["melancholy", "stark", "introspective", "rural America"],
+      "prompt_elements": {
+        "style_description": "in the style of Andrew Wyeth, American painter of stark rural landscapes and introspective figures",
+        "color_palette": "muted earth tones, dry grass browns, weathered grays, pale winter light",
+        "composition": "isolated figures in vast landscapes, weathered buildings, detailed textures",
+        "avoid": "urban settings, bright colors, joyful crowds"
+      }
+    },
+    {
+      "id": "homer",
+      "name": "Winslow Homer (Watercolor)",
+      "period": "American Realism",
+      "cultural_fit": ["American", "maritime", "nature"],
+      "mood_keywords": ["sea", "struggle", "nature", "atmospheric"],
+      "prompt_elements": {
+        "style_description": "in the watercolor style of Winslow Homer, capturing the drama of sea and nature with fluid brushwork",
+        "color_palette": "ocean blues and greens, storm grays, tropical watercolor washes",
+        "composition": "figures against sea or sky, dynamic weather, boats and coastlines",
+        "avoid": "urban scenes, dry inland settings, heavy oil painting texture"
+      }
+    },
+    {
+      "id": "hasui",
+      "name": "Kawase Hasui (Shin Hanga)",
+      "period": "20th Century Japanese",
+      "cultural_fit": ["Japanese", "Asian", "seasonal"],
+      "mood_keywords": ["serene", "seasonal", "poetic", "traditional"],
+      "prompt_elements": {
+        "style_description": "in the Shin Hanga style of Kawase Hasui, Japanese woodblock print master of atmospheric landscapes",
+        "color_palette": "subtle gradients, rain and snow effects, twilight blues and grays, cherry blossom pinks",
+        "composition": "landscapes with architectural elements, seasonal atmosphere, reflections in water",
+        "avoid": "Western architecture, harsh contrasts, non-Japanese settings"
+      }
+    },
+    {
+      "id": "vermeer",
+      "name": "Johannes Vermeer",
+      "period": "Dutch Golden Age",
+      "cultural_fit": ["Dutch", "European", "domestic"],
+      "mood_keywords": ["intimate", "luminous", "quiet", "domestic"],
+      "prompt_elements": {
+        "style_description": "in the style of Johannes Vermeer, Dutch master of light and intimate domestic scenes",
+        "color_palette": "Vermeer blue and yellow, soft diffused daylight, pearl-like luminosity",
+        "composition": "single figure by window, domestic interiors, maps and letters, characteristic left-side lighting",
+        "avoid": "outdoor scenes, multiple figures, dark or dramatic lighting"
+      }
+    }
+  ]
+}
