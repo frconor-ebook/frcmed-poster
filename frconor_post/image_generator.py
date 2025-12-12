@@ -93,18 +93,14 @@ def build_image_prompt(
     )
 
 
-def get_output_path_for_today() -> Path:
-    """Get the output directory path for today's images."""
-    output_dir = get_output_dir()
-    today = date.today().isoformat()
-    return output_dir / today
+def get_output_path() -> Path:
+    """Get the output directory path (~/Desktop)."""
+    return get_output_dir()
 
 
 def ensure_output_directory() -> Path:
-    """Create and return today's output directory."""
-    output_path = get_output_path_for_today()
-    output_path.mkdir(parents=True, exist_ok=True)
-    return output_path
+    """Return the output directory (~/Desktop)."""
+    return get_output_path()
 
 
 def get_variation_filename(variation_number: int) -> str:

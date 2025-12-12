@@ -121,8 +121,8 @@ def get_art_style_by_id(style_id: str) -> dict[str, Any] | None:
 def get_output_dir() -> Path:
     """Get the output directory for generated images."""
     settings = load_settings()
-    output_dir = settings.get("output", {}).get("image_directory", "output")
-    return get_project_root() / output_dir
+    output_dir = settings.get("output", {}).get("image_directory", "~/Desktop")
+    return Path(output_dir).expanduser()
 
 
 def get_cache_path() -> Path:

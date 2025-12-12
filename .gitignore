@@ -1,7 +1,6 @@
 # Runtime state and cache
 state/
 cache/
-output/
 
 # Python
 __pycache__/
