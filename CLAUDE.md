@@ -9,11 +9,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 pip install -e .
 
 # Run the CLI
-frconor-post                           # Interactive mode
-frconor-post --help                    # Show all options
-frconor-post --history                 # View post history
-frconor-post --llm gemini              # Use specific LLM (gemini|claude|codex)
-frconor-post --style hopper            # Override art style
+frcmed-post                           # Interactive mode
+frcmed-post --help                    # Show all options
+frcmed-post --history                 # View post history
+frcmed-post --llm gemini              # Use specific LLM (gemini|claude|codex)
+frcmed-post --style hopper            # Override art style
 ```
 
 ## Architecture

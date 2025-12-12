@@ -43,14 +43,14 @@ def validate_spotify_url(url: str) -> bool:
 def validate_transcript_url(url: str) -> bool:
     """Validate a transcript URL.
 
-    Expected pattern: https://frconor-ebook.github.io/meditations/homilies/*
+    Accepts any valid HTTP/HTTPS URL. The fetcher will handle invalid content.
     """
     if not url:
         return False
     parsed = urlparse(url)
-    if parsed.netloc != "frconor-ebook.github.io":
+    if parsed.scheme not in ("http", "https"):
         return False
-    if "/meditations/" not in parsed.path:
+    if not parsed.netloc:
         return False
     return True
 

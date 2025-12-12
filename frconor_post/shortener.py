@@ -24,6 +24,27 @@ def save_shortened_urls_cache(cache: dict[str, str]) -> None:
         json.dump(cache, f, indent=2)
 
 
+# Known URL shortener domains - skip shortening if URL is already from these
+SHORTENER_DOMAINS = {
+    "tinyurl.com",
+    "bit.ly",
+    "bitly.com",
+    "t.co",
+    "goo.gl",
+    "ow.ly",
+    "is.gd",
+    "buff.ly",
+    "short.io",
+}
+
+
+def is_already_shortened(url: str) -> bool:
+    """Check if URL is already from a URL shortener service."""
+    from urllib.parse import urlparse
+    parsed = urlparse(url)
+    return parsed.netloc.lower() in SHORTENER_DOMAINS
+
+
 def shorten_url(url: str, use_cache: bool = True) -> str:
     """Shorten a transcript URL using frcmed_shorten_cli.py.
 
@@ -32,8 +53,12 @@ def shorten_url(url: str, use_cache: bool = True) -> str:
         use_cache: Whether to use cached shortened URLs
 
     Returns:
-        Shortened URL or original URL if shortening fails
+        Shortened URL or original URL if shortening fails or already shortened
     """
+    # Skip if URL is already shortened
+    if is_already_shortened(url):
+        return url
+
     settings = load_settings()
     shortener_config = settings.get("url_shortener", {})
 

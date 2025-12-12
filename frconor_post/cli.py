@@ -297,10 +297,10 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  frconor-post                    # Interactive mode
-  frconor-post --llm gemini       # Use Gemini for quotes
-  frconor-post --style hopper     # Use Edward Hopper style
-  frconor-post --history          # View post history
+  frcmed-post                    # Interactive mode
+  frcmed-post --llm gemini       # Use Gemini for quotes
+  frcmed-post --style hopper     # Use Edward Hopper style
+  frcmed-post --history          # View post history
         """
     )
 

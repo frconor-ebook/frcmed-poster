@@ -16,7 +16,7 @@ dependencies = [
 ]
 
 [project.scripts]
-frconor-post = "frconor_post.cli:main"
+frcmed-post = "frconor_post.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]

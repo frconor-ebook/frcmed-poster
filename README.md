@@ -33,22 +33,22 @@ pip install -e .
 
 ```bash
 # Interactive mode (recommended)
-frconor-post
+frcmed-post
 
 # Specify LLM provider
-frconor-post --llm gemini
-frconor-post --llm claude
+frcmed-post --llm gemini
+frcmed-post --llm claude
 
 # Override art style
-frconor-post --style hopper
+frcmed-post --style hopper
 
 # Provide URLs directly
-frconor-post --apple "https://podcasts.apple.com/..." \
-             --spotify "https://open.spotify.com/..." \
-             --transcript "https://frconor-ebook.github.io/..."
+frcmed-post --apple "https://podcasts.apple.com/..." \
+            --spotify "https://open.spotify.com/..." \
+            --transcript "https://frconor-ebook.github.io/..."
 
 # View post history
-frconor-post --history
+frcmed-post --history
 ```
 
 ## Workflow
