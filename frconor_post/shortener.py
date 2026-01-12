@@ -72,8 +72,10 @@ def shorten_url(url: str, use_cache: bool = True) -> str:
         if url in cache:
             return cache[url]
 
-    # Get script path
+    # Get script path (expand ~ to home directory)
     script_path = shortener_config.get("script_path")
+    if script_path:
+        script_path = str(Path(script_path).expanduser())
     if not script_path or not Path(script_path).exists():
         print(f"Warning: URL shortener script not found at {script_path}")
         return url

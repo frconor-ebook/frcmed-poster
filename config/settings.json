@@ -24,7 +24,7 @@
     }
   },
   "url_shortener": {
-    "script_path": "/Users/e_wijaya_ap/Desktop/upload_frcmed_to_web/meditations/preprocessing_scripts/frcmed_shorten_cli.py",
+    "script_path": "~/Desktop/upload_frcmed_to_web/meditations/preprocessing_scripts/frcmed_shorten_cli.py",
     "enabled": true,
     "cache_enabled": true
   },
