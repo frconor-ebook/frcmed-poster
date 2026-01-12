@@ -80,9 +80,12 @@ def shorten_url(url: str, use_cache: bool = True) -> str:
         print(f"Warning: URL shortener script not found at {script_path}")
         return url
 
+    # Get Python interpreter (default to "python" if not specified)
+    python_path = shortener_config.get("python_path", "python")
+
     try:
         result = subprocess.run(
-            ["python", script_path, "--no-copy", url],
+            [python_path, script_path, "--no-copy", url],
             capture_output=True,
             text=True,
             timeout=30
